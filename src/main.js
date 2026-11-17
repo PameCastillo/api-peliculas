@@ -1,11 +1,6 @@
 import { obtenerPeliculasPopulares, buscarPeliculasPorTitulo } from './api/peliculas';
 import './style.css'
 
-// probando si salen los personajes de dragonball
-//const personajes = await obtenerPersonajes();
-// accediendo al arreglo de los personajes
-//console.log(personajes)
-
 const peliculas = await obtenerPeliculasPopulares()
 console.log(peliculas)
 
@@ -24,15 +19,9 @@ function mostrarPeliculas(peliculas) {
     resultados.innerHTML = "";
 
     peliculas.map((pelicula) => {
-        // ¿Existe release_date?
-        //   SÍ → .slice(0, 4) toma los primeros 4 caracteres → "1997"
-        //   NO → se usa el texto "Sin fecha"
         const anio = pelicula.release_date ? pelicula.release_date.slice(0, 4) : "Sin fecha";
         const sinopsis = pelicula.overview || "Sin sinopsis disponible.";
-        // poster_path NO es la imagen completa, solo un pedazo: "/abc123.jpg"
-        // Para verla hay que armar la URL: dirección base + tamaño + poster_path
-        //   SÍ hay póster → "https://image.tmdb.org/t/p/w300/abc123.jpg"
-        //   NO hay (null) → se usa una imagen genérica de placehold.co
+
         const poster = pelicula.poster_path
             ? `https://image.tmdb.org/t/p/w300${pelicula.poster_path}`
             : "https://placehold.co/300x450?text=Sin+imagen";
